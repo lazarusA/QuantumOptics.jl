@@ -5,7 +5,7 @@ module QuantumOptics
 using SparseArrays, LinearAlgebra
 
 export bases, Basis, GenericBasis, CompositeBasis, basis,
-        tensor, ⊗, permutesystems,
+        tensor, ⊗, permutesystems, @ismultiplicable,
         states, StateVector, Bra, Ket, basisstate, norm,
                 dagger, normalize, normalize!,
         operators, Operator, expect, variance, identityoperator, ptrace, embed, dense, tr,
@@ -33,7 +33,7 @@ export bases, Basis, GenericBasis, CompositeBasis, basis,
                 entropy_vn, fidelity, ptranspose, PPT,
                 negativity, logarithmic_negativity,
         spectralanalysis, eigenstates, eigenenergies, simdiag,
-        timeevolution, diagonaljumps,
+        timeevolution, diagonaljumps, @skipchecks,
         steadystate,
         timecorrelations,
         semiclassical,
@@ -63,7 +63,7 @@ include("transformations.jl")
 include("phasespace.jl")
 include("metrics.jl")
 module timeevolution
-    export diagonaljumps
+    export diagonaljumps, @skipchecks
     include("timeevolution_base.jl")
     include("master.jl")
     include("schroedinger.jl")

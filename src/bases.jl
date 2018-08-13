@@ -4,7 +4,7 @@ export Basis, GenericBasis, CompositeBasis, basis,
        tensor, ⊗, ptrace, permutesystems,
        IncompatibleBases,
        samebases, multiplicable,
-       check_samebases, check_multiplicable
+       check_samebases, check_multiplicable, @ismultiplicable
 
 import Base: ==, ^
 
@@ -214,6 +214,22 @@ function multiplicable(b1::CompositeBasis, b2::CompositeBasis)
     return true
 end
 
+
+const MULTI_CHECK = Ref(true)
+"""
+    @ismultiplicable
+
+Macro to skip multiplicability checks.
+"""
+macro ismultiplicable(ex)
+    return quote
+        MULTI_CHECK.x = false
+        local val = $(esc(ex))
+        MULTI_CHECK.x = true
+        val
+    end
+end
+
 """
     check_multiplicable(a, b)
 
@@ -221,7 +237,7 @@ Throw an [`IncompatibleBases`](@ref) error if the objects are
 not multiplicable.
 """
 function check_multiplicable(b1, b2)
-    if !multiplicable(b1, b2)
+    if MULTI_CHECK[] && !multiplicable(b1, b2)
         throw(IncompatibleBases())
     end
 end
