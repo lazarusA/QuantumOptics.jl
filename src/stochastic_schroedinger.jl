@@ -6,7 +6,7 @@ using ...bases, ...states, ...operators
 using ...operators_dense, ...operators_sparse
 using ...timeevolution
 using LinearAlgebra
-import ...timeevolution: integrate_stoch, recast!
+import ...timeevolution: integrate_stoch, recast!, QO_CHECKS
 import ...timeevolution.timeevolution_schroedinger: dschroedinger, dschroedinger_dynamic, check_schroedinger
 
 import DiffEqCallbacks
@@ -130,14 +130,14 @@ end
 
 function dschroedinger_stochastic(dx::Vector{ComplexF64}, psi::Ket, Hs::Vector{T},
             dpsi::Ket, index::Int) where T <: Operator
-    check_schroedinger(psi, Hs[index])
+    QO_CHECKS[] && check_schroedinger(psi, Hs[index])
     recast!(dx, dpsi)
     dschroedinger(psi, Hs[index], dpsi)
 end
 function dschroedinger_stochastic(dx::Array{ComplexF64, 2}, psi::Ket, Hs::Vector{T},
             dpsi::Ket, n::Int) where T <: Operator
     for i=1:n
-        check_schroedinger(psi, Hs[i])
+        QO_CHECKS[] && check_schroedinger(psi, Hs[i])
         dx_i = @view dx[:, i]
         recast!(dx_i, dpsi)
         dschroedinger(psi, Hs[i], dpsi)

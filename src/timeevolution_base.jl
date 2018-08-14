@@ -2,7 +2,7 @@ using ..metrics
 
 import OrdinaryDiffEq, DiffEqCallbacks, StochasticDiffEq
 
-export @skipchecks
+export @skiptimechecks
 
 const DiffArray = Union{Vector{ComplexF64}, Array{ComplexF64, 2}}
 
@@ -180,11 +180,11 @@ end
 
 const QO_CHECKS = Ref(true)
 """
-    @skipchecks
+    @skiptimechecks
 
 Macro to skip checks during time evolution.
 """
-macro skipchecks(ex)
+macro skiptimechecks(ex)
     return quote
         QO_CHECKS.x = false
         local val = $(esc(ex))

@@ -33,7 +33,7 @@ export bases, Basis, GenericBasis, CompositeBasis, basis,
                 entropy_vn, fidelity, ptranspose, PPT,
                 negativity, logarithmic_negativity,
         spectralanalysis, eigenstates, eigenenergies, simdiag,
-        timeevolution, diagonaljumps, @skipchecks,
+        timeevolution, diagonaljumps, @skiptimecheck,
         steadystate,
         timecorrelations,
         semiclassical,
@@ -63,7 +63,7 @@ include("transformations.jl")
 include("phasespace.jl")
 include("metrics.jl")
 module timeevolution
-    export diagonaljumps, @skipchecks
+    export diagonaljumps, @skiptimechecks
     include("timeevolution_base.jl")
     include("master.jl")
     include("schroedinger.jl")
