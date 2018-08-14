@@ -4,7 +4,7 @@ export Basis, GenericBasis, CompositeBasis, basis,
        tensor, ⊗, ptrace, permutesystems,
        IncompatibleBases,
        samebases, multiplicable,
-       check_samebases, check_multiplicable, @inbases
+       check_samebases, check_multiplicable, @samebases
 
 import Base: ==, ^
 
@@ -181,7 +181,7 @@ const BASES_CHECK = Ref(true)
 
 Macro to skip multiplicability checks.
 """
-macro inbases(ex)
+macro samebases(ex)
     return quote
         BASES_CHECK.x = false
         local val = $(esc(ex))

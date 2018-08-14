@@ -5,7 +5,7 @@ module QuantumOptics
 using SparseArrays, LinearAlgebra
 
 export bases, Basis, GenericBasis, CompositeBasis, basis,
-        tensor, ⊗, permutesystems, @ismultiplicable,
+        tensor, ⊗, permutesystems, @samebases,
         states, StateVector, Bra, Ket, basisstate, norm,
                 dagger, normalize, normalize!,
         operators, Operator, expect, variance, identityoperator, ptrace, embed, dense, tr,
