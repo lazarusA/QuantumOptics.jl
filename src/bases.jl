@@ -177,9 +177,10 @@ mutable struct IncompatibleBases <: Exception end
 
 const BASES_CHECK = Ref(true)
 """
-@ismultiplicable
+    @samebases
 
-Macro to skip multiplicability checks.
+Macro to skip checks for same bases. Useful for `*`, `expect` and similar
+functions.
 """
 macro samebases(ex)
     return quote

@@ -182,7 +182,8 @@ const QO_CHECKS = Ref(true)
 """
     @skiptimechecks
 
-Macro to skip checks during time evolution.
+Macro to skip checks during time-dependent problems.
+Useful for `timeevolution.master_dynamic` and similar functions.
 """
 macro skiptimechecks(ex)
     return quote
